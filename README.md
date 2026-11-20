@@ -7,7 +7,7 @@ Language model labels can be accurate overall and still err more on one group's 
 ## Install
 
 ```
-pip install git+https://github.com/Nyxius-Labs/groupval
+pip install groupval
 ```
 
 ## Use

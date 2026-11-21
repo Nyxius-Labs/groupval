@@ -19,9 +19,10 @@ r = validate(labels, gold, group, cluster=author, reference="D")
 r.per_group
 r.bias, r.interval
 plan_gold(r.variance_by_group["D"], r.variance_by_group["R"], halfwidth=0.03)
+allocate_gold(r.variance_by_group["D"], r.variance_by_group["R"], halfwidth=0.03)
 ```
 
-`labels` and `gold` are 0/1 arrays on the expert-labeled items, `group` holds the two groups being compared and `cluster` the author or account. `python examples/simulate.py` runs a small simulated case.
+`labels` and `gold` are 0/1 arrays on the expert-labeled items, `group` holds the two groups being compared and `cluster` the author or account. `plan_gold` gives the expert labels per group under an equal split. `allocate_gold` gives the split that minimizes the variance of the group gap for the same precision, with each group's share proportional to the standard deviation of the model's error in that group. `python examples/simulate.py` runs a small simulated case.
 
 ## Reference
 

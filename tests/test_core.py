@@ -25,3 +25,12 @@ def test_detects_group_differential_misses():
 
 def test_plan_gold_scales_with_precision():
     assert plan_gold(0.1, 0.1, 0.02) > plan_gold(0.1, 0.1, 0.04)
+
+
+def test_allocate_gold():
+    from groupval import allocate_gold, plan_gold
+    a, b = allocate_gold(0.04, 0.16, 0.03)
+    assert b > a and abs(b / a - 2) < 0.05
+    e = allocate_gold(0.09, 0.09, 0.03)
+    assert e[0] == e[1] and abs(e[0] - plan_gold(0.09, 0.09, 0.03)) <= 1
+    assert sum(allocate_gold(0.04, 0.16, 0.03)) <= 2 * plan_gold(0.04, 0.16, 0.03)

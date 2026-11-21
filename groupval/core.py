@@ -49,3 +49,12 @@ def validate(labels, gold, group, cluster=None, reference=None, draws=2000, leve
 def plan_gold(variance_a, variance_b, halfwidth, level=0.90, design_effect=1.0):
     z = norm.ppf(0.5 + level / 2)
     return int(np.ceil(design_effect * z ** 2 * (variance_a + variance_b) / halfwidth ** 2))
+
+
+def allocate_gold(variance_a, variance_b, halfwidth, level=0.90, design_effect=1.0):
+    z = norm.ppf(0.5 + level / 2)
+    sa, sb = np.sqrt(variance_a), np.sqrt(variance_b)
+    total = design_effect * z ** 2 * (sa + sb) ** 2 / halfwidth ** 2
+    if sa + sb == 0:
+        return 0, 0
+    return int(np.ceil(total * sa / (sa + sb))), int(np.ceil(total * sb / (sa + sb)))

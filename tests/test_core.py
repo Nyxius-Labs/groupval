@@ -1,6 +1,6 @@
 import numpy as np
 
-from groupval import plan_gold, validate
+from groupval import allocate_gold, plan_gold, validate
 
 
 def test_no_bias_when_labels_equal_gold():
@@ -28,7 +28,6 @@ def test_plan_gold_scales_with_precision():
 
 
 def test_allocate_gold():
-    from groupval import allocate_gold, plan_gold
     a, b = allocate_gold(0.04, 0.16, 0.03)
     assert b > a and abs(b / a - 2) < 0.05
     e = allocate_gold(0.09, 0.09, 0.03)

@@ -2,7 +2,7 @@
 
 Validate language model labels within each group before comparing groups.
 
-Language model labels can be accurate overall and still err more on one group's texts, which biases any comparison between groups. On the congressional tweets of Gilardi, Alizadeh and Kubli (2023), coders with accuracy near 0.87 overstate the Democrat minus Republican gap in political content by more than four times, because they miss more Republican political tweets. `groupval` reports sensitivity, specificity and error for each group, the bias in the between-group gap with an interval clustered by author, and the number of expert labels each group needs to estimate that bias to a chosen precision.
+Language model labels can be accurate overall and still err more on one group's texts, which biases any comparison between groups. On the congressional tweets of Gilardi, Alizadeh and Kubli (2023), Qwen 2.5 7B and Llama 3.2 3B, with pooled accuracies of 87 and 83 percent, report a Democrat minus Republican gap in political content of about 9 points, about four times the expert gap of 2.2 points, because they miss more Republican political tweets. `groupval` reports sensitivity, specificity and error for each group, the bias in the between-group gap with an interval clustered by author, and the number of expert labels each group needs to estimate that bias to a chosen precision.
 
 ## Install
 
@@ -13,7 +13,7 @@ pip install groupval
 ## Use
 
 ```python
-from groupval import validate, plan_gold
+from groupval import allocate_gold, plan_gold, validate
 
 r = validate(labels, gold, group, cluster=author, reference="D")
 r.per_group
@@ -26,7 +26,7 @@ allocate_gold(r.variance_by_group["D"], r.variance_by_group["R"], halfwidth=0.03
 
 ## Reference
 
-Crainic, J., and Yee, B. Accurate Overall, Biased Between Parties: Validating Language Model Labels Within Each Group. Extended abstract, 2026.
+Crainic, J., and Yee, B. Validating Language Model Labels Within Each Group: Party Gaps in Congressional Tweets. Extended abstract, 2026.
 
 ## License
 
